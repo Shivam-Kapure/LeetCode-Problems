@@ -4,17 +4,14 @@ public:
         if(s.size() != t.size()) {
             return false;
         }
-
-        vector <int> count(26,0);
+        vector<int> count(26,0);
         for(int i = 0; i < s.size(); i++) {
             count[s[i] - 'a']++;
             count[t[i] - 'a']--;
         }
-
-        for(int j : count) {
-            if(j != 0) {
+        for(int value : count) {
+            if(value != 0)
                 return false;
-            }
         }
         return true;
         }
