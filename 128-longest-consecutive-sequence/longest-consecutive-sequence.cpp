@@ -1,9 +1,6 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        if(nums.empty()) {
-            return 0;
-        }
         int max_len = 0;
         unordered_set<int> umap;
         for(int num : nums) {
@@ -11,6 +8,9 @@ public:
                 continue;
             }
             umap.insert(num);
+        }
+        if(nums.empty()) {
+            return 0;
         }
         for(int x : umap) {
             if(umap.find(x-1) == umap.end()) {
