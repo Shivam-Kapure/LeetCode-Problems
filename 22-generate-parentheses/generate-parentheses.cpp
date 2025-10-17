@@ -6,10 +6,14 @@ public:
             return;
         }
         if(opening_count < n) {
-            generator(v, opening_count + 1, closing_count, n, s + "(");
+            s.push_back('(');
+            generator(v, opening_count + 1, closing_count, n, s);
+            s.pop_back();
         }
         if(closing_count < opening_count) {
-            generator(v, opening_count, closing_count + 1, n, s + ")");
+            s.push_back(')');
+            generator(v, opening_count, closing_count + 1, n, s);
+            s.pop_back();
         }
     }
 
