@@ -23,7 +23,7 @@ public:
         while(left < right) {
             int mid = left + (right - left)/2;
             if(binary_helper(piles, mid, h)) {
-                right = mid;
+                right = mid; //did not do mid - 1 because mid can be the solution.
             }
             else {
                 left = mid + 1;
