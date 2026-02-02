@@ -10,10 +10,10 @@ public:
         while (l <= r) {
             int mid = l + (r - l) / 2;
 
-            if ((long)mid * mid == x)
+            if ((long long)mid * mid == x)
                 return mid;
 
-            else if ((long)mid * mid < x) {
+            else if ((long long)mid * mid < x) {
                 ans = mid;
                 l = mid + 1;
             }
