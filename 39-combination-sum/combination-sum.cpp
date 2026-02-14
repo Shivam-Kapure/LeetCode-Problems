@@ -1,26 +1,23 @@
 class Solution {
 public:
-    set<vector<int>> s;
-    void helperBT(vector<int>& candidates, vector<vector<int>>& ans, vector<int>& combination, int level, int target) {
-        if(level == candidates.size() || target < 0)
-            return;
+    void helperBT(vector<int>& candidates, vector<int>& combination, vector<vector<int>>& ans,int target, int start) {
         if(target == 0) {
-            if(s.find(combination) == s.end()) {
-                ans.push_back(combination);
-                s.insert(combination);
-                return;
-            }
+            ans.push_back(combination);
+            return;
         }
-        combination.push_back(candidates[level]);
-        helperBT(candidates, ans, combination, level + 1, target - candidates[level]);
-        helperBT(candidates, ans, combination, level, target - candidates[level]);
-        combination.pop_back();
-        helperBT(candidates, ans, combination, level + 1, target);
+        for(int i = start; i < candidates.size(); i++) {
+            if(target < candidates[i])
+                break;
+            combination.push_back(candidates[i]);
+            helperBT(candidates, combination, ans, target - candidates[i], i);
+            combination.pop_back();
+        }
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
         vector<int> combination; vector<vector<int>> ans;
-        helperBT(candidates, ans, combination, 0, target);
+        helperBT(candidates, combination, ans, target, 0);
         return ans;
     }
 };
