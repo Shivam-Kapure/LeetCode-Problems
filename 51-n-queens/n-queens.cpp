@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool isSafe(vector<string>& board, int row, int col, int n) {
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < row; i++) {
             if(board[row][i] == 'Q')
                 return false;
         }
@@ -29,7 +29,7 @@ public:
             ans.push_back(board);
             return;
         }
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < board.size(); i++) {
             if(isSafe(board, row, i, n)) {
                 board[row][i] = 'Q';
                 nQueens(board, ans, row + 1, n);
