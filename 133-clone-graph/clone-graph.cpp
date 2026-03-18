@@ -21,21 +21,29 @@ public:
 
 class Solution {
 public:
-    unordered_map<Node*, Node*> umap;
+    Node* dfsHelper(Node* curr, unordered_map<Node*, Node*>& umap) {
+        vector<Node*> clone_neighbors;
+        Node* clone = new Node(curr->val);
+        umap[curr] = clone;
 
+        for(auto it : curr->neighbors) {
+            if(umap.find(it) != umap.end())
+                clone_neighbors.push_back(umap[it]);
+            else
+                clone_neighbors.push_back(dfsHelper(it, umap));
+        }
+        clone->neighbors = clone_neighbors;
+        return clone;
+    }
     Node* cloneGraph(Node* node) {
+        unordered_map<Node*, Node*> umap;
+
         if(node == NULL)
             return node;
-        
-        if(umap.find(node) != umap.end())
-            return umap[node];
-        
-        Node* copy = new Node(node->val);
-        umap[node] = copy;
-
-        for(Node* neighbour : node->neighbors)
-            copy->neighbors.push_back(cloneGraph(neighbour));
-        
-        return copy;
+        if(node->neighbors.size() == 0) {
+            Node* clone = new Node(node->val);
+            return clone;
+        }
+        return dfsHelper(node, umap);
     }
 };
