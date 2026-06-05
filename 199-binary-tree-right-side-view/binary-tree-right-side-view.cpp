@@ -11,19 +11,21 @@
  */
 class Solution {
 public:
-    void reversePreOrder(TreeNode* root, int level, vector<int>& result) {
-        if(root == NULL)
+    void helper(TreeNode* root, int level, vector<int>& ans) {
+        if(root == nullptr)
             return;
-        if(level == result.size())
-            result.push_back(root->val);
-
-        reversePreOrder(root->right, level + 1, result);
-        reversePreOrder(root->left, level + 1, result);
+        
+        if(level == ans.size())
+            ans.push_back(root->val);
+        
+        helper(root->right, level + 1, ans);
+        helper(root->left, level + 1, ans);
     }
+
     vector<int> rightSideView(TreeNode* root) {
-        vector<int> result;
+        vector<int> ans;
         int level = 0;
-        reversePreOrder(root, level, result);
-        return result;
+        helper(root, level, ans);
+        return ans;
     }
 };
