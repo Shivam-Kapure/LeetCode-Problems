@@ -23,13 +23,13 @@ public:
         while(!st.empty()) {
             ans.push_back(st.top());
             st.pop();
-        }   
+        }
 
         while(ans.size() > 0 && ans.back() == '0')
             ans.pop_back();
         
-        if(ans.empty()) return "0";
-
+        if(ans.size() == 0) return "0";
+        
         reverse(ans.begin(), ans.end());
         return ans;
     }
