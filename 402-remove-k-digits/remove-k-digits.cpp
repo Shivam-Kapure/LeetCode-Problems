@@ -16,9 +16,9 @@ public:
             k--;
         }
 
-        while(st.empty()) return "0";
-
         string ans = "";
+
+        while(st.empty()) return "0";
 
         while(!st.empty()) {
             ans.push_back(st.top());
@@ -29,8 +29,9 @@ public:
             ans.pop_back();
         
         if(ans.size() == 0) return "0";
-        
+
         reverse(ans.begin(), ans.end());
+
         return ans;
     }
 };
